@@ -1,0 +1,122 @@
+<html>
+<head>
+
+</head>
+<body>
+    <!-- <form action = "/showFlight" method="POST">
+        <input type = "submit" value = show>
+    </form> -->
+    
+    <!-- <style type="text/css">
+        table, th, td{
+            border: 1px solid black;
+        }
+    </style> -->
+
+    <table>
+        <th>Staff Username</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+    <form action="/grantPermission" method="POST">
+    {% for line in result %}
+        <tr>
+            <td>{{line[0]}}</td>
+            <td>{{line[1]}}</td>
+            <td>{{line[2]}}</td>
+            <td>
+                <input type="radio" id="grant" name = "grant" value = {{line[0]}} required> </input>
+      	        <label for = "grant">Grant New Permission</label>
+            </td>
+        </tr>
+    {% endfor %}
+    </table>
+    <label>Status:</label> </br>
+    <input type="radio" id="AO" name="status" value= 1 required>
+  	    <label for="AO">Admin and Operator<br>
+    <input type="radio" id="!AO" name="status" value= 2 required>
+  	    <label for="!AO">Operator but not Admin</label><br>
+    <input type="radio" id="A!O" name="status" value= 3 required>
+  	    <label for="A!O">Admin but not Operator</label><br>
+    <input type="radio" id="!A!O" name="status" value= 4 required>
+  	    <label for="!A!O">Neither Operator nor Admin</label><br>
+    <input type = "submit" value = Confirm>
+    </form>
+    
+    {% if banner %}
+            <p class="error"><strong>Result:</strong> {{banner}}</p>
+    {% endif %}
+
+    <style type="text/css">
+
+        body {
+        background-color: #ddd;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        }
+
+        input[type=text], select {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        }
+
+        input[type=number], select {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        }
+
+        input[type=radio]{
+            color : black
+        }
+
+        input[type=submit] {
+        width: 105%;
+        background-color: rgba(155, 10, 174, 0.87);
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        }
+
+        input[type=submit]:hover {
+        background-color: rgba(210, 99, 224, 0.87);
+        }
+
+        div {
+        border-radius: 5px;
+        background-color: #f2f2f2;
+        padding: 20px;
+        }
+
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+                }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+            }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+            }
+
+    </style>
+</body>
+</html>

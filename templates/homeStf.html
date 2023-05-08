@@ -1,0 +1,257 @@
+<html>
+<head>
+</head>
+
+<body>
+     <form action="/viewStf" method="POST">
+        <input type="submit" name="view_my_flight" value = 'View My Flight' />
+    </form>
+        
+     <style type="text/css">
+        table, th, td{
+            border: 1px solid black;
+         }
+    </style>
+        
+    <table>
+          <th>Flight Number</th>
+          <th>Departure Time</th>
+          <th>Arrival Time</th>
+    <form action="/viewFlight" method="POST">
+     {% for line in result %}
+        <tr>
+            <td>{{line[0]}}</td>
+            <td>{{line[1]}}</td>
+            <td>{{line[2]}}</td>
+            <td>
+                <input type="radio" id="ticket" name = "ticket" value = {{line[0]}} required>
+  	            <label for = "ticket">View</label>
+            </td>
+         </tr>
+    {% endfor %}
+    </table>
+
+    <input type="submit" name = 'confirm' value = 'View the chosen flight' />
+    
+    <p>Customer for your selected flight:</p>
+    <table>
+        <th>Customer email</th>
+        <th>Customer name</th>
+       
+    {% for line in result1 %}
+        <tr>
+           <td>{{line[0]}}</td>
+           <td>{{line[1]}}</td>
+        </tr>
+   {% endfor %}
+    </table>
+    </form>
+    
+    <form action="/tocreate" method="POST">
+        <input type="submit" name="createNewFlights" value="Create New Flights">
+    </form>
+
+    <form action="/toupdate" method="POST">
+        <input type="submit" name="updateStatus" value="Update Flight Status">
+    </form>
+    <form action="/toAddPlane" method="POST">
+        <input type="submit" name="addPlane" value="Add New Plane">
+    </form>
+    <form action="/toAddAirport" method="POST">
+        <input type="submit" name="addAirport" value="Add New Airport">
+    </form>
+    <form action="/toGrant" method="POST">
+        <input type="submit" name="toGrant" value="Grant permission to other staffs">
+    </form>
+    <form action="/toAddAgents" method="POST">
+        <input type="submit" name="toAddAgents" value="Add new agent">
+    </form>
+    <form action="/toReport" method="POST">
+        <input type="submit" name="toReport" value="View Ticket Report">
+    </form>
+    <form action="/toRevenueYear" method="POST">
+        <input type="submit" name="toRevenueYear" value="View Revenue Comparison in Year">
+    </form>
+    <form action="/toRevenueMonth" method="POST">
+        <input type="submit" name="toRevenueMonth" value="View Revenue Comparison in Month">
+    </form>
+    
+
+    {% if error %}
+		<p class="error"><strong>Error:</strong> {{error}}</p>
+	{% endif %}
+
+    <form action="/viewAgents" method="POST">
+        <input type="submit" name="viewAgents" value="View All Agents">
+        <p>Top5 agents for past month based on number of tickets </p>
+        <table>
+            <th>Agent Email</th>
+            <th>Booking_agent_ID</th>
+        {% for line in result1 %}
+            <tr>
+                <td>{{line[0]}}</td>
+                <td>{{line[1]}}</td>
+            </tr>
+        {% endfor %}
+        </table>
+        <p>Top5 agents for past year based on number of tickets </p>
+        <table>
+            <th>Agent Email</th>
+            <th>Booking_agent_ID</th>
+            {% for line in result2 %}
+                <tr>
+                    <td>{{line[0]}}</td>
+                    <td>{{line[1]}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+        <p>Top5 agents for past year based on commision </p>
+        <table>
+            <th>Agent Email</th>
+            <th>Booking_agent_ID</th>
+            {% for line in result3 %}
+                <tr>
+                    <td>{{line[0]}}</td>
+                    <td>{{line[1]}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </form>
+
+    <form action="/viewFreqCus" method="POST">
+        <input type="submit" name="viewFreqCus" value="View Most Frequent Customer">
+        <p>Most frequent customer past year based on number of tickets: </p>
+        <table>
+            <th>Customer Email</th>
+            <th>Customer Name</th>
+        {% for line in result_cus %}
+            <tr>
+                <td>{{line[0]}}</td>
+                <td>{{line[1]}}</td>
+            </tr>
+        {% endfor %}
+        </table>
+        <p>The Flight of this customer: </p>
+        <table>
+            <th>Flight_num</th>
+            <th>Depart Time</th>
+            <th>Arrive Time</th>
+            <th>Price</th>
+            <th>Plane</th>
+            <th>Depart Airport</th>
+            <th>Arrive Airport</th>
+            {% for line in result_fli %}
+                <tr>
+                    <td>{{line[0]}}</td>
+                    <td>{{line[1]}}</td>
+                    <td>{{line[2]}}</td>
+                    <td>{{line[3]}}</td>
+                    <td>{{line[4]}}</td>
+                    <td>{{line[5]}}</td>
+                    <td>{{line[6]}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </form>
+    <form action="/viewReports" method="POST">
+        <input type="submit" name="viewReports" value="View Most Frequent Destination">
+        <p>Most frequent destination city past 3 months: </p>
+        <table>
+            <th>City name</th>
+            <th>Times</th>
+        {% for line in result_des_3 %}
+            <tr>
+                <td>{{line[0]}}</td>
+                <td>{{line[1]}}</td>
+            </tr>
+        {% endfor %}
+        </table>
+        <p>Most frequent destination city past year: </p>
+        <table>
+            <th>City name</th>
+            <th>Times</th>
+        {% for line in result_des_y %}
+            <tr>
+                <td>{{line[0]}}</td>
+                <td>{{line[1]}}</td>
+            </tr>
+        {% endfor %}
+        </table>
+    </form>
+    
+    <a href="/logoutStf">Log out</a>
+
+    <style type="text/css">
+
+        body {
+        background-color: #ddd;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        }
+
+        input[type=text], select {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        }
+
+        input[type=number], select {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        }
+
+        input[type=radio]{
+            color : black
+        }
+
+        input[type=submit] {
+        width: 105%;
+        background-color: rgba(155, 10, 174, 0.87);
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        }
+
+        input[type=submit]:hover {
+        background-color: rgba(210, 99, 224, 0.87);
+        }
+
+        div {
+        border-radius: 5px;
+        background-color: #f2f2f2;
+        padding: 20px;
+        }
+
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+                }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+            }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+            }
+
+    </style>
+</body>
+</html>

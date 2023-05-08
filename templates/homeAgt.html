@@ -1,0 +1,170 @@
+<html>
+<head>
+</head>
+
+<body>
+    <form action="/viewAgt" method="POST">
+        <input type="submit" name="view_my_flight" value = 'View My Flight' />
+    </form>
+    
+    <style type="text/css">
+        table, th, td{
+            border: 1px solid black;
+        }
+    </style>
+
+    <table>
+        <th>Flight Number</th>
+        <th>Departure Time</th>
+        <th>Arrival Time</th>
+    
+    {% for line in result %}
+        <tr>
+            <td>{{line[0]}}</td>
+            <td>{{line[1]}}</td>
+            <td>{{line[2]}}</td>
+        </tr>
+    {% endfor %}
+    </table>
+
+    
+    <form action="/searchAgt" method="POST">
+        <label>Source City / Departure Airport:</label>
+        <input type="text" name = "dep_city_port" required/> </br>
+        <label>Destination City / Arrival Airport:</label>
+        <input type="text" name = "des_city_port" required/></br>
+        <label>Date:</label>
+        <input type="text" name = "date" required/> </br>
+        <input type="submit" value = Search />
+    </form>
+    
+
+    <table>
+        <th>Flight Number</th>
+        <th>Departure Time</th>
+        <th>Arrival Time</th>
+        <th>choose</th>
+    <form action="/purticketAgt" method="POST">
+    {% for line in result1 %}
+        <tr>
+            <td>{{line[0]}}</td>
+            <td>{{line[1]}}</td>
+            <td>{{line[2]}}</td>
+            <td>
+                {% if line[3] in airline %} 
+                <input type="radio" id="ticket" name = "ticket" value = {{line[0]}}>
+  	            <label for = "ticket">Purchase</label>
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+    </table>
+    <label for="cus_email">customer email:</label>
+    <input type = "text" id = 'cus_email' name = 'cus_email'> 
+    <input type="submit" value = Confirm />
+    </form>
+    {% if banner %}
+	<p class="banner"><strong>Result:</strong> {{banner}}</p>
+    {% endif %}
+
+
+    <form action="/chartCus" method="POST">
+        <input type="submit" name = "view" value = 'View your Spending' />
+    </form>
+    </div>
+    <div>
+    <form action="/view_comm" method="POST">
+        <input type = 'text' name = 'start_date' value = '2022-11-14'>
+        <input type = 'text' name = 'end_date' value = '2022-12-13'>
+        <input type="submit" value = Confirm />
+        <table>
+            <th>Total amount of commision</th>
+            <th>Average amount of commision</th>
+            <th>Total number of tickets</th>
+        {% for line in result1 %}
+            <tr>
+                <td>{{line[0]}}</td>
+                <td>{{line[1]}}</td>
+                <td>{{line[2]}}</td>
+            </tr>
+        {% endfor %}
+        </table>
+        </form>
+
+    <a href="/logoutAgt">Logout</a>
+
+    <style type="text/css">
+
+        body {
+        background-color: #ddd;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        }
+
+        input[type=text], select {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        }
+
+        input[type=number], select {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        }
+
+        input[type=radio]{
+            color : black
+        }
+
+        input[type=submit] {
+        width: 105%;
+        background-color: rgba(155, 10, 174, 0.87);
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        }
+
+        input[type=submit]:hover {
+        background-color: rgba(210, 99, 224, 0.87);
+        }
+
+        div {
+        border-radius: 5px;
+        background-color: #f2f2f2;
+        padding: 20px;
+        }
+
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+                }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+            }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+            }
+
+    </style>
+
+</body>
+</html>

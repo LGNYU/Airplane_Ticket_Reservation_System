@@ -1,0 +1,18 @@
+<html>
+<head>
+</head>
+
+<body>  
+    <form action="/addAgents" method="POST">
+        <label>Agent Email:</label>
+        <input type="text" name = "a_email" required/> </br>
+        <input type="submit" value = add >
+    </form>
+
+    {% if banner %}
+	<p class="banner"><strong>Result:</strong> {{banner}}</p>
+    {% endif %}
+
+
+</body>
+</html>

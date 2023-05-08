@@ -1,0 +1,156 @@
+<html>
+<head>
+</head>
+
+<body>  
+     <style type="text/css">
+        table, th, td{
+            border: 1px solid black;
+         }
+    </style>
+        
+    <table>
+          <th>Flight Number</th>
+          <th>Departure Time</th>
+          <th>Arrival Time</th>
+     {% for line in result %}
+        <tr>
+            <td>{{line[0]}}</td>
+            <td>{{line[1]}}</td>
+            <td>{{line[2]}}</td>
+         </tr>
+    {% endfor %}
+    </table>
+
+    <form action="/addFlightAdmin" method="POST">
+        <p> Format: YYYY-MM-DD hh:mm:ss </p></br>
+        <label>Depart time:</label>
+        <input type="text" name = "depart_time" required/> </br>
+        <label>Arrive time:</label>
+        <input type="text" name = "arrive_time" required/> </br>
+        <label>Price:</label>
+        <input type="text" name = "price" required/> </br>
+
+        <label>Status:</label> </br>
+        <input type="radio" id="upcoming" name="status" value="upcoming" required>
+  	    <label for="upcoming">upcoming<br>
+        <input type="radio" id="delayed" name="status" value="delayed" required>
+  	    <label for="delayed">delayed</label><br>
+        <input type="radio" id="in-progress" name="status" value="in-progress" required>
+  	    <label for="in-progress">in-progress</label><br>
+<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!注意双括号-->
+        <p>Plane ID:</p>
+        <table>
+         {% for line in result_plane %}
+            <tr>
+                <td>
+            <input type="radio" id="plane_id" name = "plane_id" value = "{{line[0]}}" required>
+          	<label for = "plane_id"> {{line[0]}} </label>
+                </td>
+            </tr>
+        {% endfor %}
+        </table>
+
+        <p>Depart Airport:</p>
+        <table>
+        {% for line in result_port %}
+            <tr>
+                <td>
+            <input type="radio" id="depart_airport" name = "depart_airport" value = {{line[0]}} required>
+      	    <label for = "depart_airport"> {{line[0]}} </label>
+                </td>
+            </tr>
+        {% endfor %}
+        </table>
+
+        <p>Arrive Airport:</p>
+        <table>
+        {% for line in result_port %}
+            <tr>
+                <td>
+            <input type="radio" id="arrive_airport" name = "arrive_airport" value = {{line[0]}} required>
+      	    <label for = "arrive_airport"> {{line[0]}} </label>
+                </td>
+            </tr>
+        {% endfor %}
+        </table>
+        <input type="submit" value = add >
+    </form>
+    {% if banner %}
+	<p class="banner"><strong>Result:</strong> {{banner}}</p>
+    {% endif %}
+
+    <style type="text/css">
+
+        body {
+        background-color: #ddd;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        }
+
+        input[type=text], select {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        }
+
+        input[type=number], select {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        }
+
+        input[type=radio]{
+            color : black
+        }
+
+        input[type=submit] {
+        width: 105%;
+        background-color: rgba(155, 10, 174, 0.87);
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        }
+
+        input[type=submit]:hover {
+        background-color: rgba(210, 99, 224, 0.87);
+        }
+
+        div {
+        border-radius: 5px;
+        background-color: #f2f2f2;
+        padding: 20px;
+        }
+
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+                }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+            }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+            }
+
+    </style>
+</body>
+</html>

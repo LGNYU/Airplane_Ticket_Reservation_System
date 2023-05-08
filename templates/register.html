@@ -1,0 +1,98 @@
+<html>
+<head>
+</head>
+<body>
+<p>You are a:</p>
+<form action="/registerAuth" method="POST">
+	<input type="radio" id="customer" name="user" value="Customer">
+  	<label for="customer">Customer</label><br>
+  	<input type="radio" id="booking_agent" name="user" value="Booking Agent">
+  	<label for="booking_agent">Booking Agent</label><br>
+  	<input type="radio" id="airline_staff" name="user" value="Airline Staff">
+  	<label for="airline_staff">Airline Staff</label><br>
+	<input type="submit" value = Register />
+
+	{% if error %}
+		<p class="error"><strong>Error:</strong> {{error}}</p>
+	{% endif %}
+
+	<style type="text/css">
+
+        body {
+        background-color: #ddd;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        }
+
+        input[type=text], select {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        }
+
+        input[type=number], select {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        }
+
+        input[type=radio]{
+            color : black
+        }
+
+        input[type=submit] {
+        width: 105%;
+        background-color: rgba(155, 10, 174, 0.87);
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        }
+
+        input[type=submit]:hover {
+        background-color: rgba(210, 99, 224, 0.87);
+        }
+
+        div {
+        border-radius: 5px;
+        background-color: #f2f2f2;
+        padding: 20px;
+        }
+
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+                }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+            }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+            }
+
+    </style>
+</form>
+
+
+
+
+<a href="/">Go back</a>
+</body>
+</html>
